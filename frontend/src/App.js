@@ -10,6 +10,8 @@ import TopProductsChart from "./TopProductsChart";
 import ProfitMarginHistogram from "./ProfitMarginHistogram";
 import CategoryAveragesChart from "./CategoryAveragesChart";
 import CatalogSummaryChart from "./CatalogSummaryChart";
+import SuggestedProducts from "./SuggestedProducts";
+import WhyTrustUs from "./WhyTrustUs";
 
 export default function App() {
   const [results, setResults] = useState([]);
@@ -78,6 +80,7 @@ export default function App() {
     <div className="bg-white min-h-screen font-inter">
       <HeroSection />
       <UploadSection onDrop={handleDrop} fileName={fileName} loading={loading} />
+      <SuggestedProducts />
       {/* Progress bar and ETA */}
       {loading && progress && (
         <div className="max-w-xl mx-auto my-8 bg-white rounded-xl shadow p-6 flex flex-col items-center">
@@ -108,6 +111,7 @@ export default function App() {
           </div>
         </>
       )}
+      <WhyTrustUs />
       <CalloutSection />
       <Footer />
     </div>
