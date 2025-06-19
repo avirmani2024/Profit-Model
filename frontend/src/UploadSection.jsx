@@ -78,7 +78,7 @@ export default function UploadSection({ onDrop, fileName, loading }) {
                   </ul>
                   <button
                     className="bg-green-100 text-green-800 font-semibold px-4 py-2 rounded shadow hover:bg-green-200 transition mb-4"
-                    onClick={() => window.open("/template.xlsx", "_blank")}
+                    onClick={() => window.open("/Fake_Product_List_Wholesale_Prices.csv", "_blank")}
                   >
                     ⬇ Download Example Template
                   </button>
@@ -183,7 +183,7 @@ export default function UploadSection({ onDrop, fileName, loading }) {
         )}
         {/* Example File */}
         <a
-          href="/Medical_Supplies_Catalog_Sample_10.xlsx"
+          href="/Fake_Product_List_Wholesale_Prices.csv"
           download
           className="flex items-center gap-2 mt-6 text-blue-600 hover:underline"
         >
