@@ -1,8 +1,6 @@
 import { useDropzone } from "react-dropzone";
 import { FaFileCsv, FaDownload } from "react-icons/fa";
 import { motion } from "framer-motion";
-import Lottie from "lottie-react";
-import spreadsheetAnim from "./Animation - 1750309740676.json";
 import React, { useState } from "react";
 
 export default function UploadSection({ onDrop, fileName, loading }) {
