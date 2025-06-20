@@ -3,6 +3,11 @@ import HeroSection from "./HeroSection";
 import UploadSection from "./UploadSection";
 import SuggestedProducts from "./SuggestedProducts";
 import WhyTrustUs from "./WhyTrustUs";
+import ProductTable from "./ProductTable";
+import TopProductsChart from "./TopProductsChart";
+import ProfitMarginHistogram from "./ProfitMarginHistogram";
+import CategoryChart from "./CategoryChart";
+import CatalogSummaryChart from "./CatalogSummaryChart";
 
 export default function App() {
   const [fileName, setFileName] = useState("");
@@ -70,31 +75,47 @@ export default function App() {
     }
   };
 
+  // Progress bar style
+  const progressPercent = progress && progress.total_rows > 0 ? Math.round((progress.rows_processed / progress.total_rows) * 100) : 0;
+
   return (
     <div>
       <HeroSection />
       <UploadSection onDrop={onDrop} fileName={fileName} loading={loading} />
-      {/* Progress and Results UI */}
-      {progress && (
-        <div style={{ margin: "20px 0", textAlign: "center" }}>
-          <h3>Processing Progress</h3>
-          <p>
+      {/* Progress Bar and Spinner */}
+      {progress && !progress.done && (
+        <div className="flex flex-col items-center my-8">
+          <div className="w-full max-w-md bg-gray-200 rounded-full h-4 mb-2">
+            <div
+              className="bg-indigo-600 h-4 rounded-full transition-all"
+              style={{ width: `${progressPercent}%` }}
+            ></div>
+          </div>
+          <div className="text-sm text-gray-700 mb-1">
             {progress.rows_processed} / {progress.total_rows} rows processed
-            {progress.eta_seconds !== null && !progress.done && (
+            {progress.eta_seconds !== null && (
               <> (ETA: {progress.eta_seconds} seconds)</>
             )}
-          </p>
-          {!progress.done && <span>⏳ Processing...</span>}
-          {progress.done && <span>✅ Done!</span>}
+          </div>
+          <div className="text-indigo-600 animate-spin text-2xl">⏳</div>
         </div>
       )}
-      {results && (
-        <div style={{ margin: "20px 0", textAlign: "center" }}>
-          <h3>Results</h3>
-          <pre style={{ textAlign: "left", maxWidth: 600, margin: "0 auto", background: "#f4f4f4", padding: 10, borderRadius: 8 }}>
-            {JSON.stringify(results, null, 2)}
-          </pre>
-        </div>
+      {/* Results Section */}
+      {results && results.results && results.results.length > 0 && (
+        <>
+          <ProductTable data={results.results} />
+          {results.top5 && <TopProductsChart data={results.top5} />}
+          {results.histogram && <ProfitMarginHistogram data={results.histogram} />}
+          {results.category_averages && <CategoryChart chartData={{
+            labels: Object.keys(results.category_averages),
+            datasets: [{
+              label: 'Avg. Profit Margin %',
+              data: Object.values(results.category_averages),
+              backgroundColor: '#818cf8',
+            }],
+          }} />}
+          {results.summary && <CatalogSummaryChart data={results.summary} />}
+        </>
       )}
       {error && (
         <div style={{ color: "red", textAlign: "center", margin: "20px 0" }}>{error}</div>
