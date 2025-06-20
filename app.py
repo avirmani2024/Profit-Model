@@ -1,4 +1,20 @@
 import subprocess
+import asyncio
+from playwright.async_api import async_playwright
+
+async def warmup_playwright():
+    try:
+        async with async_playwright() as p:
+            browser = await p.chromium.launch(headless=True, args=["--no-sandbox"])
+            await browser.close()
+        print("Playwright browser pre-warmed at startup.")
+    except Exception as e:
+        print("Playwright warmup failed:", e)
+
+try:
+    asyncio.get_event_loop().run_until_complete(warmup_playwright())
+except Exception as e:
+    print("Playwright warmup outer exception:", e)
 
 try:
     subprocess.run(["playwright", "install", "chromium"], check=True)
