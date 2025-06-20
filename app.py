@@ -3,16 +3,20 @@ import asyncio
 from playwright.async_api import async_playwright
 import threading
 
-def start_playwright_warmup():
-    async def warmup_playwright():
-        try:
-            async with async_playwright() as p:
-                browser = await p.chromium.launch(headless=True, args=["--no-sandbox"])
-                await browser.close()
-            print("Playwright browser pre-warmed at startup.")
-        except Exception as e:
-            print("Playwright warmup failed:", e)
+def install_and_warmup():
     try:
+        subprocess.run(["playwright", "install", "chromium"], check=True)
+    except Exception as e:
+        print("Playwright install failed:", e)
+    try:
+        async def warmup_playwright():
+            try:
+                async with async_playwright() as p:
+                    browser = await p.chromium.launch(headless=True, args=["--no-sandbox"])
+                    await browser.close()
+                print("Playwright browser pre-warmed at startup.")
+            except Exception as e:
+                print("Playwright warmup failed:", e)
         loop = asyncio.get_event_loop()
         if loop.is_running():
             threading.Thread(target=lambda: asyncio.run(warmup_playwright())).start()
@@ -21,12 +25,7 @@ def start_playwright_warmup():
     except Exception as e:
         print("Playwright warmup outer exception:", e)
 
-start_playwright_warmup()
-
-try:
-    subprocess.run(["playwright", "install", "chromium"], check=True)
-except Exception as e:
-    print("Failed to install Playwright browsers at runtime:", e)
+install_and_warmup()
 
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
