@@ -76,26 +76,26 @@ export default function App() {
   };
 
   return (
-    <div className="bg-white min-h-screen font-inter">
+    <div className="bg-deepMidnight min-h-screen font-inter">
       <HeroSection />
       <UploadSection onDrop={handleDrop} fileName={fileName} loading={loading} />
       <SuggestedProducts />
       {/* Progress bar and ETA */}
       {loading && progress && (
-        <div className="max-w-xl mx-auto my-8 bg-white rounded-xl shadow p-6 flex flex-col items-center">
+        <div className="max-w-xl mx-auto my-8 bg-softSlate rounded-xl shadow p-6 flex flex-col items-center border border-deepMidnight">
           <div className="w-full mb-2">
-            <div className="flex justify-between text-sm text-gray-600 mb-1">
+            <div className="flex justify-between text-sm text-iceWhite/80 mb-1">
               <span>Processing row {progress.rows_processed} of {progress.total_rows}</span>
               <span>ETA: {progress.eta_seconds !== null ? `${progress.eta_seconds}s` : 'Calculating...'}</span>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-3">
+            <div className="w-full bg-deepMidnight rounded-full h-3">
               <div
-                className="bg-blue-500 h-3 rounded-full transition-all duration-300"
+                className="bg-electricPurple h-3 rounded-full transition-all duration-300"
                 style={{ width: `${progress.total_rows ? (progress.rows_processed / progress.total_rows) * 100 : 0}%` }}
               ></div>
             </div>
           </div>
-          <span className="text-xs text-gray-400">Please wait while we process your file...</span>
+          <span className="text-xs text-iceWhite/60">Please wait while we process your file...</span>
         </div>
       )}
       {results.length > 0 && (
@@ -103,10 +103,18 @@ export default function App() {
           <ProductTable data={results} />
           {/* Dashboard grid of 4 charts */}
           <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 my-12">
-            <TopProductsChart data={top5} />
-            <ProfitMarginHistogram data={histogram} />
-            <CategoryAveragesChart data={categoryAverages} />
-            <CatalogSummaryChart data={summary} />
+            <div className="bg-softSlate rounded-2xl shadow-lg p-6 border border-deepMidnight">
+              <TopProductsChart data={top5} />
+            </div>
+            <div className="bg-softSlate rounded-2xl shadow-lg p-6 border border-deepMidnight">
+              <ProfitMarginHistogram data={histogram} />
+            </div>
+            <div className="bg-softSlate rounded-2xl shadow-lg p-6 border border-deepMidnight">
+              <CategoryAveragesChart data={categoryAverages} />
+            </div>
+            <div className="bg-softSlate rounded-2xl shadow-lg p-6 border border-deepMidnight">
+              <CatalogSummaryChart data={summary} />
+            </div>
           </div>
         </>
       )}

@@ -14,12 +14,15 @@ export default function CategoryChart({ chartData }) {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
     >
-      <div className="bg-white rounded-2xl shadow-lg p-8">
-        <h2 className="text-xl font-bold text-[#1A3A61] mb-4">Average Profit Margin by Category</h2>
+      <div className="bg-softSlate rounded-2xl shadow-lg p-8">
+        <h2 className="text-2xl font-extrabold mb-4 font-inter text-electricPurple drop-shadow-lg">Average Profit Margin by Category</h2>
         <Bar data={chartData} options={{
           responsive: true,
           plugins: { legend: { display: false } },
-          scales: { y: { beginAtZero: true, ticks: { color: '#1A3A61' } }, x: { ticks: { color: '#1A3A61' } } }
+          scales: {
+            y: { beginAtZero: true, ticks: { color: '#f5f6ff' }, title: { display: true, text: 'Avg. Profit Margin %', color: '#f5f6ff' }, grid: { color: 'rgba(245,246,255,0.08)' } },
+            x: { ticks: { color: '#f5f6ff' }, title: { display: true, text: 'Category', color: '#f5f6ff' }, grid: { color: 'rgba(245,246,255,0.08)' } }
+          }
         }} />
       </div>
     </motion.section>

@@ -52,36 +52,36 @@ export default function UploadSection({ onDrop, fileName, loading }) {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
     >
-      <div id="upload-section" className="bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center w-full max-w-xl border border-gray-100">
+      <div id="upload-section" className="bg-softSlate rounded-2xl shadow-xl p-8 flex flex-col items-center w-full max-w-xl border border-deepMidnight">
         {/* Collapsible CSV Formatting Box */}
         <div className="mb-8">
           <button
-            className="flex items-center gap-2 text-indigo-700 font-semibold px-4 py-2 rounded-t-lg bg-indigo-50 hover:bg-indigo-100 transition shadow-sm"
+            className="flex items-center gap-2 text-electricPurple font-semibold px-4 py-2 rounded-t-lg bg-softSlate hover:bg-electricPurple/10 transition shadow-sm"
             onClick={() => setShowFormat((v) => !v)}
           >
             <span>{showFormat ? "Hide" : "Show"} CSV Formatting Guide</span>
             <span className="text-lg">{showFormat ? "▲" : "▼"}</span>
           </button>
           {showFormat && (
-            <div className="bg-white rounded-b-xl shadow-md p-6 border-t border-indigo-100">
+            <div className="bg-softSlate rounded-b-xl shadow-md p-6 border-t border-deepMidnight text-iceWhite">
               <div className="flex flex-col md:flex-row gap-8 items-start">
                 <div className="flex-1">
-                  <h2 className="text-xl font-bold mb-2 flex items-center gap-2">
-                    <span className="text-green-500">✔</span> Required Columns
+                  <h2 className="text-xl font-bold mb-2 flex items-center gap-2 text-limeAccent">
+                    <span className="text-limeAccent">✔</span> Required Columns
                   </h2>
-                  <ul className="list-disc ml-6 text-gray-700 mb-3">
-                    <li><span className="text-green-500">✔</span> <b>Description</b></li>
-                    <li><span className="text-green-500">✔</span> <b>Starting wholesale Price</b></li>
-                    <li><span className="text-green-400">(Optional)</span> <b>Category</b></li>
+                  <ul className="list-disc ml-6 text-iceWhite mb-3">
+                    <li><span className="text-limeAccent">✔</span> <b>Description</b></li>
+                    <li><span className="text-limeAccent">✔</span> <b>Starting wholesale Price</b></li>
+                    <li><span className="text-limeAccent">(Optional)</span> <b>Category</b></li>
                   </ul>
                   <button
-                    className="bg-green-100 text-green-800 font-semibold px-4 py-2 rounded shadow hover:bg-green-200 transition mb-4"
+                    className="bg-limeAccent text-deepMidnight font-semibold px-4 py-2 rounded-full shadow hover:bg-limeAccent/80 transition mb-4"
                     onClick={() => window.open("/Fake_Product_List_Wholesale_Prices.csv", "_blank")}
                   >
                     ⬇ Download Example Template
                   </button>
-                  <div className="overflow-x-auto border rounded-lg bg-gray-50 p-2 mb-2">
-                    <table className="min-w-max text-sm">
+                  <div className="overflow-x-auto border rounded-lg bg-deepMidnight p-2 mb-2">
+                    <table className="min-w-max text-sm text-iceWhite">
                       <thead>
                         <tr>
                           <th className="px-2 py-1">Description</th>
@@ -103,13 +103,13 @@ export default function UploadSection({ onDrop, fileName, loading }) {
                       </tbody>
                     </table>
                   </div>
-                  <div className="text-green-700 font-semibold mt-2">
+                  <div className="text-limeAccent font-semibold mt-2">
                     <span>We never store your data. All processing is secure and private.</span>
                   </div>
                 </div>
                 {/* Mini-form to generate CSV */}
-                <div className="flex-1 bg-gray-50 rounded-lg p-4 shadow-inner">
-                  <h3 className="font-semibold mb-2">Quick CSV Builder</h3>
+                <div className="flex-1 bg-deepMidnight rounded-lg p-4 shadow-inner border border-deepMidnight">
+                  <h3 className="font-semibold mb-2 text-iceWhite">Quick CSV Builder</h3>
                   <form
                     onSubmit={e => { e.preventDefault(); handleMiniDownload(); }}
                     className="flex flex-col gap-2"
@@ -119,7 +119,7 @@ export default function UploadSection({ onDrop, fileName, loading }) {
                         <input
                           type="text"
                           placeholder="Description"
-                          className="border rounded px-2 py-1 flex-1"
+                          className="border border-softSlate rounded px-2 py-1 flex-1 bg-softSlate text-iceWhite placeholder-iceWhite/60"
                           value={row.description}
                           onChange={e => handleMiniRowChange(idx, "description", e.target.value)}
                           required={idx === 0}
@@ -127,7 +127,7 @@ export default function UploadSection({ onDrop, fileName, loading }) {
                         <input
                           type="number"
                           placeholder="Wholesale Price"
-                          className="border rounded px-2 py-1 w-32"
+                          className="border border-softSlate rounded px-2 py-1 w-32 bg-softSlate text-iceWhite placeholder-iceWhite/60"
                           value={row.price}
                           onChange={e => handleMiniRowChange(idx, "price", e.target.value)}
                           required={idx === 0}
@@ -135,7 +135,7 @@ export default function UploadSection({ onDrop, fileName, loading }) {
                         <input
                           type="text"
                           placeholder="Category (optional)"
-                          className="border rounded px-2 py-1 w-32"
+                          className="border border-softSlate rounded px-2 py-1 w-32 bg-softSlate text-iceWhite placeholder-iceWhite/60"
                           value={row.category}
                           onChange={e => handleMiniRowChange(idx, "category", e.target.value)}
                         />
@@ -143,7 +143,7 @@ export default function UploadSection({ onDrop, fileName, loading }) {
                     ))}
                     <button
                       type="submit"
-                      className="bg-indigo-600 text-white font-semibold px-4 py-2 rounded shadow hover:bg-indigo-700 transition mt-2"
+                      className="bg-gradient-to-r from-electricPurple to-purple-500 text-iceWhite font-semibold px-4 py-2 rounded-full shadow hover:scale-105 transition-transform duration-150 mt-2"
                     >
                       Download My CSV
                     </button>
@@ -156,34 +156,36 @@ export default function UploadSection({ onDrop, fileName, loading }) {
         <div
           {...getRootProps()}
           className={`w-full flex flex-col items-center justify-center border-2 border-dashed rounded-xl p-8 cursor-pointer transition ${
-            isDragActive ? "border-blue-400 bg-blue-50" : "border-gray-200"
+            isDragActive ? "border-electricPurple bg-electricPurple/10" : "border-[#31224a]"
           }`}
         >
           <input {...getInputProps()} />
-          <button
-            className="bg-[#1A3A61] text-white font-bold py-3 px-8 rounded-lg text-lg shadow-md hover:scale-105 transition-all flex items-center gap-2"
+          <motion.button
+            className="bg-gradient-to-r from-electricPurple to-purple-500 text-iceWhite font-bold py-3 px-8 rounded-full text-lg shadow-md flex items-center gap-2 hover:scale-105 transition-transform duration-150"
             type="button"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
           >
             <FaFileCsv className="text-2xl animate-bounce" />
             Upload CSV
-          </button>
-          <p className="mt-3 text-gray-600 text-sm">
+          </motion.button>
+          <p className="mt-3 text-iceWhite/80 text-sm">
             CSV or Excel file must include columns: <b>Description</b>, <b>Starting wholesale Price</b>
           </p>
         </div>
         {/* Upload feedback */}
         {fileName && (
-          <div className="mt-3 flex items-center gap-2 text-blue-700 font-semibold">
+          <div className="mt-3 flex items-center gap-2 text-limeAccent font-semibold">
             <span className="truncate max-w-xs">{fileName}</span>
             {loading && <span className="animate-spin ml-2">⏳</span>}
-            {!loading && <span className="text-green-500">✔️ Uploaded!</span>}
+            {!loading && <span className="text-limeAccent">✔️ Uploaded!</span>}
           </div>
         )}
         {/* Example File */}
         <a
           href="/Fake_Product_List_Wholesale_Prices.csv"
           download
-          className="flex items-center gap-2 mt-6 text-blue-600 hover:underline"
+          className="flex items-center gap-2 mt-6 text-electricPurple hover:underline"
         >
           <FaDownload />
           Download Example File

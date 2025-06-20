@@ -42,16 +42,27 @@ export default function TopProductsChart({ data }) {
     scales: {
       y: {
         ticks: {
-          color: '#1A3A61',
+          color: '#f5f6ff',
           callback: function(val, idx) {
             return chartData.labels[idx];
           },
         },
+        title: {
+          display: true,
+          text: 'Product',
+          color: '#f5f6ff',
+        },
+        grid: {
+          color: 'rgba(245,246,255,0.08)'
+        }
       },
       x: {
         beginAtZero: true,
-        title: { display: true, text: 'Profit Margin %' },
-        ticks: { color: '#1A3A61' },
+        title: { display: true, text: 'Profit Margin %', color: '#f5f6ff' },
+        ticks: { color: '#f5f6ff' },
+        grid: {
+          color: 'rgba(245,246,255,0.08)'
+        }
       },
     },
     animation: {
@@ -60,8 +71,8 @@ export default function TopProductsChart({ data }) {
     },
   };
   return (
-    <motion.div className="bg-white rounded-2xl shadow-md p-6 overflow-x-auto min-h-[400px]" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-      <h3 className="text-lg font-bold text-[#1A3A61] mb-2">Top 10 Products by Profit Margin</h3>
+    <motion.div className="bg-softSlate rounded-2xl shadow-md p-6 overflow-x-auto min-h-[400px]" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+      <h3 className="text-2xl font-extrabold mb-2 font-inter text-electricPurple drop-shadow-lg">Top 10 Products by Profit Margin</h3>
       <div className="w-full min-w-[350px]" style={{height: Math.max(400, 40 * sorted.length)}}>
         <Bar data={chartData} options={options} />
       </div>
