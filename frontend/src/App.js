@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import HeroSection from "./HeroSection";
 import UploadSection from "./UploadSection";
 import ProductTable from "./ProductTable";
-import CategoryChart from "./CategoryChart";
 import CalloutSection from "./CalloutSection";
 import Footer from "./Footer";
 import axios from "axios";
