@@ -158,7 +158,9 @@ async def process_file(file_content: bytes, upload_id: str = None) -> Dict:
             wholesale_price = row[price_col]
             category = row.get('Category', None) if 'Category' in row else None
             try:
+                print(f"Scraping Amazon for: {description}")
                 asins, titles, prices = await scrape_amazon_top_10_playwright_async(description)
+                print(f"Scraping results for '{description}': asins={asins}, titles={titles}, prices={prices}")
                 matches = []
                 for asin, title, price in zip(asins, titles, prices):
                     if not asin or not title or not price:
@@ -174,6 +176,7 @@ async def process_file(file_content: bytes, upload_id: str = None) -> Dict:
                             "score": score
                         })
                 if not matches:
+                    print(f"No matches found for: {description}")
                     results.append({
                         "description": description,
                         "amazon_title": None,
@@ -281,6 +284,8 @@ async def process_file(file_content: bytes, upload_id: str = None) -> Dict:
                     eta = avg_time * (total_rows - (idx + 1))
                     global_progress[upload_id]['eta_seconds'] = int(eta)
             except Exception as e:
+                print(f"Exception while processing '{description}': {e}")
+                traceback.print_exc()
                 # Always append a result, even if there is an error
                 results.append({
                     "description": description,
