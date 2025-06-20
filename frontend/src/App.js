@@ -29,12 +29,12 @@ export default function App() {
     if (loading && uploadId) {
       interval = setInterval(async () => {
         try {
-          const res = await axios.get(`http://localhost:8000/progress/${uploadId}`);
+          const res = await axios.get(`https://profit-model.onrender.com/progress/${uploadId}`);
           setProgress(res.data);
           if (res.data.done) {
             clearInterval(interval);
             // Fetch results when done
-            const resultsRes = await axios.get(`http://localhost:8000/results/${uploadId}`);
+            const resultsRes = await axios.get(`https://profit-model.onrender.com/results/${uploadId}`);
             setResults(resultsRes.data.results || []);
             setTop5(resultsRes.data.top5 || []);
             setHistogram(resultsRes.data.histogram || {});
@@ -68,7 +68,7 @@ export default function App() {
     const formData = new FormData();
     formData.append("file", file);
     // Get upload_id from backend
-    const res = await axios.post("http://localhost:8000/process", formData, {
+    const res = await axios.post("https://profit-model.onrender.com/process", formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
     setUploadId(res.data.upload_id || null);
