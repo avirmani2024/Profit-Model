@@ -58,7 +58,7 @@ We welcome contributions from the community! Want to improve CSV parsing, scrapi
 
 ## 🙌 Contributors
 
-- 💻 Built by: [@avirmani2024](https://github.com/avirmani2024)
+- 💻 Built by: [@avirmani2024](https://github.com/avirmani2024) and [@ParshawnH](https://github.com/ParshawnH)
 - 🧠 AI Co-Pilot: ChatGPT-4o
 
 ---
