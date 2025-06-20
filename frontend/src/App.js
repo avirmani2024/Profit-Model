@@ -19,7 +19,7 @@ export default function App() {
 
     try {
       // Use relative path for backend if deployed together, or full URL if separate
-      const response = await fetch("/process", {
+      await fetch("/process", {
         method: "POST",
         body: formData,
       });
