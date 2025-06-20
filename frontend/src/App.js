@@ -18,8 +18,7 @@ export default function App() {
     formData.append("file", file);
 
     try {
-      // Use relative path for backend if deployed together, or full URL if separate
-      await fetch("/process", {
+      await fetch("https://profit-model.onrender.com/process", {
         method: "POST",
         body: formData,
       });
