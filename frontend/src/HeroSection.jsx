@@ -24,15 +24,23 @@ export default function HeroSection() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
           >
-            Find Your Next Winning Product
+            Wholesale List to Profit Insights, Instantly.
           </motion.h1>
           <motion.p
-            className="text-xl md:text-2xl mb-8 font-inter text-iceWhite/90 max-w-xl"
+            className="text-xl md:text-2xl mb-4 font-inter text-iceWhite/90 max-w-xl"
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
           >
-            The ultimate tool for Amazon FBA/FBM sellers. We analyze real-time data to uncover high-margin opportunities.
+            Stop the guesswork. We analyze every product on your list against real-time Amazon data to reveal your most profitable opportunities.
+          </motion.p>
+          <motion.p
+            className="text-lg mt-2 mb-8 font-inter text-limeAccent/90"
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+          >
+            Upload your wholesale price list below to get started.
           </motion.p>
           <motion.button
             className="bg-electricPurple bg-gradient-to-r from-electricPurple to-purple-500 text-iceWhite font-bold px-8 py-3 rounded-full shadow-lg hover:scale-105 transition-transform duration-150 text-lg"
