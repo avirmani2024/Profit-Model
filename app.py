@@ -1,20 +1,27 @@
 import subprocess
 import asyncio
 from playwright.async_api import async_playwright
+import threading
 
-async def warmup_playwright():
+def start_playwright_warmup():
+    async def warmup_playwright():
+        try:
+            async with async_playwright() as p:
+                browser = await p.chromium.launch(headless=True, args=["--no-sandbox"])
+                await browser.close()
+            print("Playwright browser pre-warmed at startup.")
+        except Exception as e:
+            print("Playwright warmup failed:", e)
     try:
-        async with async_playwright() as p:
-            browser = await p.chromium.launch(headless=True, args=["--no-sandbox"])
-            await browser.close()
-        print("Playwright browser pre-warmed at startup.")
+        loop = asyncio.get_event_loop()
+        if loop.is_running():
+            threading.Thread(target=lambda: asyncio.run(warmup_playwright())).start()
+        else:
+            loop.run_until_complete(warmup_playwright())
     except Exception as e:
-        print("Playwright warmup failed:", e)
+        print("Playwright warmup outer exception:", e)
 
-try:
-    asyncio.get_event_loop().run_until_complete(warmup_playwright())
-except Exception as e:
-    print("Playwright warmup outer exception:", e)
+start_playwright_warmup()
 
 try:
     subprocess.run(["playwright", "install", "chromium"], check=True)
@@ -36,7 +43,6 @@ from selenium.webdriver.chrome.service import Service
 import re
 import uuid
 import time
-import threading
 
 app = FastAPI(title="Amazon Profit Calculator")
 
