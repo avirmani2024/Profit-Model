@@ -371,7 +371,7 @@ def process_file_background(file_content: bytes, upload_id: str):
 
 @app.post("/process")
 async def process_upload(file: UploadFile = File(...)):
-    """Process uploaded file in background and return upload_id immediately."""
+    print("==== /process endpoint called ====")
     if not file.filename.endswith((".xlsx", ".csv")):
         raise HTTPException(status_code=400, detail="File must be Excel (.xlsx) or CSV (.csv)")
     try:
